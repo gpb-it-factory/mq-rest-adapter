@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  title: API баланса кошелька
+  description: API для получения баланса кошелька
+  version: 1.0.0
+paths:
+  /wallet/balance:
+    post:
+      summary: Получить баланс кошелька
+      description: Получает баланс кошелька на основе предоставленных параметров
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetWalletBalanceRequest'
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletBalanceResponse'
+components:
+  schemas:
+    GetWalletBalanceRequest:
+      type: object
+      properties:
+        clientId:
+          type: string
+          format: uuid
+          description: Идентификатор клиента
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        dateFrom:
+          type: string
+          format: date-time
+          description: Начальная дата для расчета баланса
+          example: 2024-06-01T12:00:00Z
+        dateTo:
+          type: string
+          format: date-time
+          description: Конечная дата для расчета баланса
+          example: 2024-06-01T13:00:00Z
+    GetWalletBalanceResponse:
+      type: object
+      properties:
+        balance:
+          type: string
+          format: decimal
+          description: Баланс кошелька
+        currency:
+          type: string
+          description: Валюта баланса
+        lastUpdated:
+          type: string
+          format: date-time
+          description: Дата последнего обновления баланса
