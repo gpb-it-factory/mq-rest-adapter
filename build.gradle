@@ -57,6 +57,7 @@ ext {
 }
 
 dependencies {
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
