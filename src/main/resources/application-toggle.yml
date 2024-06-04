@@ -1,2 +1,2 @@
 features:
-  isWalletIntegrationEnabled: false
+  walletIntegrationEnabled: false

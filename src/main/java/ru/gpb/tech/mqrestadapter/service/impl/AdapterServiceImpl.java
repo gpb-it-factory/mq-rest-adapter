@@ -1,7 +1,9 @@
 package ru.gpb.tech.mqrestadapter.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.gpb.tech.mqrestadapter.config.FeatureToggleConfig;
 import ru.gpb.tech.mqrestadapter.feign.WalletClient;
@@ -17,6 +19,7 @@ import java.util.Optional;
 /**
  * Класс для обработки запросов клиентов
  */
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class AdapterServiceImpl implements AdapterService {
@@ -43,6 +46,7 @@ public class AdapterServiceImpl implements AdapterService {
     }
     
     private void executeOldLogic(ClientRequest clientRequest) {
+        log.info("Выполнение старой логики сервиса");
         ClientResponse clientResponse = new ClientResponse();
         clientResponse.setLastUpdated(clientRequest.getDateTo());
         clientResponse.setBalance(BigDecimal.ONE);
@@ -52,10 +56,11 @@ public class AdapterServiceImpl implements AdapterService {
     }
     
     private void executeNewLogic(ClientRequest request) {
+        log.info("Выполнение новой логики сервиса");
         Optional.ofNullable(request)
                 .map(mapper::toWalletRequest)
                 .map(walletClient::getBalance)
-                .filter(response -> response.getStatusCode().is2xxSuccessful())
+                .filter(response -> HttpStatus.OK.equals(response.getStatusCode()))
                 .map(HttpEntity::getBody)
                 .map(mapper::toClientResponse)
                 .ifPresentOrElse(publisher::sendSuccess,

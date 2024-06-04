@@ -26,6 +26,6 @@ public class MqPublisher {
      * @param error данные об ошибке
      */
     public void sendError(String error) {
-        log.error("Отправка ответа с ошибкой {}", error);
+        log.info("Отправка ответа с ошибкой {}", error);
     }
 }

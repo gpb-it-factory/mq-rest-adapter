@@ -13,11 +13,6 @@ java {
 }
 
 sourceSets {
-    generated {
-        java {
-            srcDirs = ['build/generated/sources/openapi/src/main/java']
-        }
-    }
     main {
         java {
             srcDir 'src/main/java'
@@ -29,9 +24,9 @@ sourceSets {
 openApiGenerate {
     inputSpec = "${projectDir}/src/main/resources/openapi.yaml"
     generatorName = 'spring'
-    outputDir = "${buildDir}/generated/sources/openapi"
-    apiPackage = 'ru.gpbtech.mqrestadapter.api'
-    modelPackage = 'ru.gpbtech.mqrestadapter.model'
+    outputDir = "${projectDir}/build/generated/sources/openapi"
+    apiPackage = 'ru.gpb.tech.mqrestadapter.api'
+    modelPackage = 'ru.gpb.tech.mqrestadapter.model'
     generateApiDocumentation = false
     configOptions = [
             dateLibrary: "java8",
@@ -69,14 +64,16 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.testcontainers:rabbitmq'
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-contract-stub-runner
-    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner:4.1.3'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-contract-wiremock
+    testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock:4.1.3'
 
 }
 

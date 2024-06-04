@@ -1,15 +1,4 @@
-spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-  application:
-    name: mq-rest-adapter
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
+service:
+  paths:
+    wallet:
+      url: http://localhost:9999

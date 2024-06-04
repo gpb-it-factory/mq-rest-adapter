@@ -14,8 +14,8 @@ import ru.gpb.tech.mqrestadapter.mapper.WalletBalanceMapper;
 import ru.gpb.tech.mqrestadapter.model.ClientRequest;
 import ru.gpb.tech.mqrestadapter.model.ClientResponse;
 import ru.gpb.tech.mqrestadapter.service.MqPublisher;
-import ru.gpbtech.mqrestadapter.model.GetWalletBalanceRequest;
-import ru.gpbtech.mqrestadapter.model.GetWalletBalanceResponse;
+import ru.gpb.tech.mqrestadapter.model.GetWalletBalanceRequest;
+import ru.gpb.tech.mqrestadapter.model.GetWalletBalanceResponse;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

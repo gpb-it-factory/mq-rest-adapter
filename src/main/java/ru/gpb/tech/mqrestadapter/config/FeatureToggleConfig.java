@@ -1,19 +1,19 @@
 package ru.gpb.tech.mqrestadapter.config;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * Конфиг для доступа к фиче-тоглам из application-toggle.yml
- * */
-@Getter
-@Configuration
+ */
+@Data
+@Component
 @ConfigurationProperties(prefix = "features")
 public class FeatureToggleConfig {
     
     /**
      * Флаг для регулирования работы новой интеграции с сервисом wallet
      */
-    boolean isWalletIntegrationEnabled;
+    boolean walletIntegrationEnabled;
 }

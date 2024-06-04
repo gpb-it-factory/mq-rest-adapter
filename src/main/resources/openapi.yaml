@@ -6,6 +6,7 @@ info:
 paths:
   /wallet/balance:
     post:
+      operationId: walletBalancePost
       summary: Получить баланс кошелька
       description: Получает баланс кошелька на основе предоставленных параметров
       requestBody:
