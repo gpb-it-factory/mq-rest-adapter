@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   rabbitmq:
     host: localhost
@@ -19,5 +22,21 @@ feign:
 service:
   paths:
     wallet:
-      url: wallet
+      url: http://localhost:8080
       method: /wallet/balance
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        slidingWindowSize: 100
+        permittedNumberOfCallsInHalfOpenState: 10
+        slowCallDurationThreshold: 4s
+        slowCallRateThreshold: 90
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        minimumNumberOfCalls: 10
+    instances:
+      getBalanceCircuitBreaker:
+        baseConfig: default
+        failureRateThreshold: 3

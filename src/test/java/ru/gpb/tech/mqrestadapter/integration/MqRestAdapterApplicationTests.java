@@ -71,9 +71,9 @@ class MqRestAdapterApplicationTests {
         
         ClientRequest request = new ClientRequest();
         request.setClientId(UUID.randomUUID());
+        request.setDateFrom(OffsetDateTime.now());
         request.setDateTo(OffsetDateTime.now().plusDays(1));
-        request.setDateTo(OffsetDateTime.now());
-        
+
         rabbitTemplate.convertAndSend("adapterQueue", request);
         
         ArgumentCaptor<ClientResponse> responseCaptor = ArgumentCaptor.forClass(ClientResponse.class);
